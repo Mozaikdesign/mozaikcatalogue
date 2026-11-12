@@ -1,0 +1,10 @@
+<!doctype html><html><body style="margin:0;background:#fff"><div id="out"></div>
+<script type="module">
+import * as pdfjs from 'https://cdn.jsdelivr.net/npm/pdfjs-dist@4.4.168/build/pdf.min.mjs';
+pdfjs.GlobalWorkerOptions.workerSrc='https://cdn.jsdelivr.net/npm/pdfjs-dist@4.4.168/build/pdf.worker.min.mjs';
+const P='https://www.classicon.com/files/classicon/Product%20Sheets/';
+window.render=async(f)=>{const out=document.getElementById('out');out.innerHTML='';document.title='loading';
+ try{const pdf=await pdfjs.getDocument(f.startsWith('http')?f:P+f).promise;
+ for(let n=1;n<=pdf.numPages;n++){const page=await pdf.getPage(n);const v=page.getViewport({scale:1});const vp=page.getViewport({scale:900/v.width});const c=document.createElement('canvas');c.width=vp.width;c.height=vp.height;c.style.display='block';out.append(c);await page.render({canvasContext:c.getContext('2d'),viewport:vp}).promise;}
+ document.title='done '+pdf.numPages;}catch(e){document.title='err '+e.message;}};
+</script></body></html>

@@ -1,0 +1,329 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>İdil's Showroom · Mozaik</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F4F4F3;--surface:#FFFFFF;--ink:#111111;--muted:#77777A;--line:#E3E3E1;--mz-red:#BE202E;--body:"Archivo",system-ui,-apple-system,"Segoe UI",sans-serif;--display:"Archivo",system-ui,-apple-system,"Segoe UI",sans-serif}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font:15px/1.5 var(--body);-webkit-font-smoothing:antialiased}
+a{color:var(--ink);text-decoration:none}
+a:hover{color:var(--mz-red)}
+button{font:inherit;color:inherit;cursor:pointer}
+img{display:block;max-width:100%}
+:focus-visible{outline:2px solid var(--mz-red);outline-offset:2px}
+.wrap{max-width:1400px;margin:0 auto;padding-inline:clamp(16px,4vw,48px)}
+header{position:sticky;top:0;z-index:5;background:color-mix(in srgb,var(--bg) 94%,transparent);backdrop-filter:blur(10px)}
+.bar{display:flex;align-items:center;gap:20px;padding-block:18px}
+.brand{display:flex;align-items:center;gap:16px}
+.mz-logo{display:block;height:24px;width:auto;color:var(--ink)}
+.brand small{font:500 .64rem/1 var(--body);letter-spacing:.16em;text-transform:uppercase;color:var(--muted);padding-left:16px;border-left:1px solid var(--line)}
+.sp{flex:1}
+.search-btn{display:flex;align-items:center;gap:8px;height:36px;padding:0 14px;border:1px solid var(--ink);background:none;font:600 .7rem/1 var(--body);letter-spacing:.12em;text-transform:uppercase}
+.search-btn svg{width:16px;height:16px}
+.search-btn:hover{background:var(--ink);color:var(--bg)}
+.lang{display:flex;border:1px solid var(--line)}
+.lang button{border:0;background:none;padding:8px 12px;font-size:.7rem;font-weight:600;letter-spacing:.12em}
+.lang button[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
+.sitetabs{display:flex;justify-content:center;gap:28px;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.sitetabs a{padding:12px 0;font:600 .72rem/1 var(--body);letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+.sitetabs a:hover{color:var(--ink)}
+.sitetabs a[aria-current="page"]{color:var(--ink);box-shadow:inset 0 -2px 0 var(--mz-red)}
+.searchrow{position:relative;margin-top:14px}
+.searchrow input{width:100%;font:inherit;font-size:.92rem;padding:14px 40px 14px 30px;border:0;border-bottom:1px solid var(--ink);background:transparent;color:var(--ink);border-radius:0}
+.searchrow input:focus{outline:none;border-bottom-color:var(--mz-red)}
+.searchrow svg{position:absolute;left:2px;top:50%;transform:translateY(-50%);width:18px;height:18px;pointer-events:none}
+.searchrow .qx{position:absolute;right:0;top:50%;transform:translateY(-50%);border:0;background:none;width:32px;height:32px;font-size:1.1rem}
+.intro{display:grid;justify-items:center;text-align:center;gap:10px;padding-block:40px 28px}
+.eyebrow{font-size:.66rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+.intro h1{margin:0;font:500 clamp(3.2rem,10vw,7.5rem)/.95 var(--display);letter-spacing:-.05em;text-wrap:balance}
+.intro p{margin:6px 0 0;max-width:52ch;font-size:.88rem;color:var(--muted);text-wrap:pretty}
+.cats{display:flex;flex-wrap:wrap;justify-content:center;gap:6px}
+.cats button{border:1px solid transparent;background:none;padding:10px 14px;font:500 .72rem/1 var(--body);letter-spacing:.14em;text-transform:uppercase}
+.cats button small{font-size:.62rem;margin-left:5px;color:var(--muted)}
+.cats button[aria-current="true"]{border-color:var(--ink)}
+.tools{display:flex;align-items:center;gap:16px;flex-wrap:wrap;padding-block:22px 18px}
+.sel{position:relative}
+.sel select{appearance:none;-webkit-appearance:none;border:1px solid var(--ink);border-radius:0;background:transparent;color:var(--ink);font:600 .7rem/1 var(--body);letter-spacing:.12em;text-transform:uppercase;height:36px;padding:0 34px 0 12px;max-width:62vw}
+.sel::after{content:"";position:absolute;right:13px;top:50%;width:6px;height:6px;border-right:1.5px solid var(--ink);border-bottom:1.5px solid var(--ink);transform:translateY(-70%) rotate(45deg);pointer-events:none}
+.count{margin-left:auto;font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,280px),1fr));gap:12px;padding-bottom:64px}
+.card{all:unset;cursor:pointer;display:flex;flex-direction:column;background:var(--surface);padding:14px 14px 18px;min-width:0}
+.card:focus-visible{outline:2px solid var(--mz-red);outline-offset:2px}
+.media{aspect-ratio:4/3;background:#fff;overflow:hidden}
+.media img{width:100%;height:100%;object-fit:contain;transition:transform .5s ease}
+.card:hover .media img{transform:scale(1.03)}
+.meta{margin-top:14px;display:grid;gap:3px}
+.meta .br{font-size:.62rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+.meta h3{margin:0;font:500 .92rem/1.3 var(--body);letter-spacing:-.01em}
+.meta .dm{font-size:.74rem;color:var(--muted)}
+.qty{justify-self:start;margin-top:6px;font-size:.62rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;padding:4px 8px;border:1px solid var(--ink)}
+.soon{justify-self:start;margin-top:6px;font-size:.62rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;padding:4px 8px;background:var(--ink);color:var(--bg)}
+.empty{grid-column:1/-1;text-align:center;padding:60px 0;color:var(--muted)}
+.sheet{position:fixed;inset:0;z-index:20;display:grid;grid-template-columns:1.25fr 1fr;background:var(--surface)}
+[hidden]{display:none!important}
+.sheet .hero{position:relative;background:#fff;min-height:0}
+.sheet .body{overflow-y:auto;padding:calc(env(safe-area-inset-top,0px) + 28px) clamp(20px,4vw,48px) calc(env(safe-area-inset-bottom,0px) + 40px);min-width:0}
+.close{position:absolute;top:calc(env(safe-area-inset-top,0px) + 16px);left:16px;z-index:3;border:1px solid var(--line);background:var(--surface);width:48px;height:48px;font-size:1.4rem;line-height:1}
+.sheet .eyebrow{font-size:.66rem;letter-spacing:.2em}
+.sheet h2{font:500 clamp(2.2rem,4.4vw,3.4rem)/1 var(--display);letter-spacing:-.04em;margin:8px 0 6px}
+.sheet .by{color:var(--muted);margin:0 0 28px}
+.spec{border-top:1px solid var(--line);padding-block:18px;display:grid;grid-template-columns:150px 1fr;gap:16px}
+.spec h4{margin:0;font-size:.72rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);padding-top:3px}
+.spec p{margin:0}
+.spec ul{margin:0;padding:0;list-style:none;display:flex;flex-wrap:wrap;gap:8px}
+.spec li{border:1px solid var(--line);padding:5px 12px;font-size:.88rem}
+.spec ul.plain{display:grid;gap:4px}
+.spec ul.plain li{border:0;padding:0;font-size:.95rem}
+.spec ul.codes li{font-size:.78rem;color:var(--muted);font-variant-numeric:tabular-nums}
+.mats{display:grid;grid-template-columns:repeat(auto-fill,minmax(72px,1fr));gap:8px}
+.mats button{aspect-ratio:1;border:1px solid var(--line);background:#fff;padding:0;cursor:zoom-in}
+.mats img{width:100%;height:100%;object-fit:contain}
+.actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+.btn{display:inline-flex;align-items:center;border:1px solid var(--ink);background:none;color:var(--ink);padding:14px 20px;font:600 .76rem/1 var(--body);letter-spacing:.1em;text-transform:uppercase;text-decoration:none}
+.btn:hover{background:var(--ink);color:var(--bg)}
+.btn.primary{background:var(--ink);color:var(--bg)}
+.btn.primary:hover{background:var(--mz-red);border-color:var(--mz-red);color:#fff}
+.gal{position:absolute;inset:0;display:flex;flex-direction:column;background:#FFFFFF}
+.gal-main{position:relative;flex:1;min-height:0;cursor:zoom-in;touch-action:pan-y}
+.gal-main img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;padding:5%}
+.gal-nav{position:absolute;top:50%;transform:translateY(-50%);z-index:2;border:0;width:48px;height:48px;background:rgb(255 255 255 / .9);color:#1B1D1F;font-size:1.4rem;box-shadow:0 2px 10px rgb(0 0 0 / .15)}
+.gal-nav.prev{left:16px}.gal-nav.next{right:16px}
+.gal-zoom{position:absolute;right:16px;bottom:16px;z-index:2;border:0;padding:10px 16px;background:rgb(27 29 31 / .82);color:#FFFFFF;font-size:.82rem;font-weight:600;letter-spacing:.04em}
+.thumbs{display:flex;gap:8px;padding:10px 12px;overflow-x:auto;background:#F2F1EE;flex:none}
+.thumbs button{flex:none;width:76px;height:54px;border:2px solid transparent;padding:0;background:#FFFFFF;overflow:hidden}
+.thumbs button[aria-current="true"]{border-color:#1B1D1F}
+.thumbs img{width:100%;height:100%;object-fit:contain}
+.lb{position:fixed;inset:0;z-index:40;background:#0E0F0F;color:#FFFFFF;display:flex;flex-direction:column}
+.lb-top{display:flex;align-items:center;gap:12px;padding:calc(env(safe-area-inset-top,0px) + 12px) 16px 12px}
+.lb-title{flex:1;min-width:0;font:500 1.3rem/1.2 var(--display);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lb-count{font-size:.85rem;color:#B9BBB6;font-variant-numeric:tabular-nums}
+.lb-btn{border:1px solid rgb(255 255 255 / .25);background:none;color:#FFFFFF;width:44px;height:44px;font-size:1.25rem;line-height:1}
+.lb-stage{position:relative;flex:1;min-height:0;overflow:hidden;background:#FFFFFF;cursor:zoom-in;touch-action:pinch-zoom}
+.lb-stage img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;transition:transform .25s ease;transform-origin:center}
+.lb-stage.z{cursor:zoom-out}
+.lb-stage.z img{transform:scale(2.2)}
+.lb-nav{position:absolute;top:50%;transform:translateY(-50%);z-index:2;border:0;width:52px;height:52px;background:rgb(27 29 31 / .7);color:#FFFFFF;font-size:1.5rem}
+.lb-nav.prev{left:16px}.lb-nav.next{right:16px}
+footer{border-top:1px solid var(--line);padding-block:28px;font-size:.74rem;color:var(--muted)}
+footer .wrap{display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+@media (max-width:820px){
+  .sheet{grid-template-columns:1fr;grid-template-rows:48vh 1fr}
+  .gal-nav{width:40px;height:40px}
+  .spec{grid-template-columns:1fr;gap:6px}
+}
+@media (max-width:640px){
+  .bar{padding-block:12px;gap:10px}
+  .mz-logo{height:20px}
+  .brand small{display:none}
+  .search-btn{padding:0 10px;height:34px}
+  .search-btn span{display:none}
+  .sitetabs{gap:22px}
+  .searchrow input{font-size:16px;padding-block:12px}
+  .intro{justify-items:start;text-align:left;padding-block:22px 14px}
+  .intro h1{font-size:clamp(2.2rem,11vw,3rem)}
+  .intro p{display:none}
+  .cats{flex-wrap:nowrap;justify-content:flex-start;overflow-x:auto;scrollbar-width:none;margin-inline:-16px;padding-inline:16px}
+  .cats::-webkit-scrollbar{display:none}
+  .cats button{flex:none;white-space:nowrap;padding:10px}
+  .tools{padding-block:14px 12px;gap:8px}
+  .sel select{font-size:16px;letter-spacing:0;text-transform:none;font-weight:500;height:34px}
+  .count{display:none}
+  .grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:4px}
+  .card{padding:8px 8px 12px}
+  .meta{margin-top:8px}
+  .meta h3{font-size:.8rem}
+  .meta .dm{font-size:.68rem}
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap bar">
+    <a class="brand" href="index.html">__LOGO__<small>İdil's Showroom</small></a>
+    <div class="sp"></div>
+    <button class="search-btn" type="button" id="search-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.5-3.5"></path></svg><span data-t="search">Ara</span></button>
+    <div class="lang" role="group" aria-label="Language"><button data-lang="tr" aria-pressed="true">TR</button><button data-lang="en" aria-pressed="false">EN</button></div>
+  </div>
+  <nav class="sitetabs wrap" aria-label="Sections"><a href="index.html" data-t="tab_cat">Katalog</a><a href="showroom.html" aria-current="page">İdil's Showroom</a></nav>
+</header>
+<main class="wrap">
+  <div class="searchrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.5-3.5"></path></svg><input id="q" type="search" autocomplete="off"><button class="qx" id="qx" hidden aria-label="Clear">×</button></div>
+  <section class="intro"><div class="eyebrow" data-t="eyebrow">Showroom stoğu · Ekim 2026</div><h1 id="title">Kanepeler</h1><p data-t="intro">Showroom'da şu an hazır bulunan parçalar. Ölçü, kaplama ve adet bilgisiyle.</p></section>
+  <nav class="cats" id="cats" aria-label="Categories"></nav>
+  <div class="tools"><div class="sel"><select id="brandsel" aria-label="Brand"></select></div><div class="sel"><select id="stsel" aria-label="Status"></select></div><span class="count" id="count"></span></div>
+  <div class="grid" id="grid"></div>
+</main>
+<footer><div class="wrap">__LOGO__<span>© 2026 Mozaik Design · İdil's Showroom</span></div></footer>
+<div class="sheet" id="sheet" hidden role="dialog" aria-modal="true" aria-labelledby="d-name">
+  <div class="hero" id="d-hero"><button class="close" id="d-close" aria-label="Close">&times;</button></div>
+  <div class="body">
+    <div class="eyebrow" id="d-brand"></div>
+    <h2 id="d-name"></h2>
+    <p class="by" id="d-des"></p>
+    <div class="spec" id="d-dims-row"><h4 data-t="h_dims">Ölçüler</h4><div id="d-dims"></div></div>
+    <div class="spec" id="d-qty-row"><h4 data-t="h_qty">Stok</h4><p id="d-qty"></p></div>
+    <div class="spec" id="d-fin-row"><h4 data-t="h_fin">Kaplama & malzeme</h4><ul class="plain" id="d-fin"></ul></div>
+    <div class="spec" id="d-mat-row"><h4 data-t="h_mat">Örnekler & çizimler</h4><div class="mats" id="d-mat"></div></div>
+    <div class="spec" id="d-note-row"><h4 data-t="h_note">Kodlar & notlar</h4><ul class="plain codes" id="d-note"></ul></div>
+    <div class="actions">
+      <button class="btn primary" id="d-share" type="button" data-t="share">Linki kopyala</button>
+      <a class="btn" id="d-wa" target="_blank" rel="noopener" data-t="ask">WhatsApp ile sor</a>
+      <button class="btn" id="d-next" type="button" data-t="next">Sonraki parça →</button>
+    </div>
+  </div>
+</div>
+<div class="lb" id="lb" hidden role="dialog" aria-modal="true" aria-label="Photo viewer">
+  <div class="lb-top"><div class="lb-title" id="lb-title"></div><span class="lb-count" id="lb-count"></span><button class="lb-btn" id="lb-close" aria-label="Close">&times;</button></div>
+  <div class="lb-stage" id="lb-stage"><img id="lb-img" alt="" draggable="false"><button class="lb-nav prev" id="lb-prev" aria-label="Previous">&#8249;</button><button class="lb-nav next" id="lb-next" aria-label="Next">&#8250;</button></div>
+</div>
+  <div class="body">
+    <div class="br" id="d-brand"></div><h2 id="d-name"></h2><div class="ds" id="d-des"></div>
+    <div class="spec" id="d-dims-row"><h4 data-t="h_dims">Ölçüler</h4><ul id="d-dims"></ul></div>
+    <div class="spec" id="d-qty-row"><h4 data-t="h_qty">Stok</h4><p id="d-qty"></p></div>
+    <div class="spec" id="d-fin-row"><h4 data-t="h_fin">Kaplama & malzeme</h4><ul id="d-fin"></ul></div>
+    <div class="acts"><a class="btn" id="d-wa" target="_blank" rel="noopener" data-t="ask">WhatsApp ile sor</a><button class="btn ghost" id="d-share" type="button" data-t="share">Linki kopyala</button></div>
+  </div>
+  <div class="nav"><button id="d-prev" aria-label="Previous">←</button><button id="d-next" aria-label="Next">→</button></div>
+</div></div>
+<script>
+const IMG = "showroom/";
+const DATA = __DATA__;
+const CATS = ["sofas","armchairs","chairs","stools","tables","coffee","desks","consoles","shelves","beds","mirrors","outdoor"];
+const T = {
+ tr:{search:"Ara",tab_cat:"Katalog",eyebrow:"Showroom stoğu · Ekim 2026",intro:"Showroom'da şu an hazır bulunan parçalar. Ölçü, kaplama ve adet bilgisiyle.",h_dims:"Ölçüler",h_qty:"Stok",h_fin:"Kaplama & malzeme",h_mat:"Örnekler & çizimler",h_note:"Kodlar & notlar",ask:"WhatsApp ile sor",next:"Sonraki parça →",zoom:"Yakınlaştır",share:"Linki kopyala",copied:"Kopyalandı",all:"Tüm markalar",pieces:"parça",pcs:"adet",photos:"fotoğraf",ph:"Ürün, marka veya tasarımcı ara",none:"Sonuç bulunamadı",results:"Arama sonuçları",st_all:"Tüm durumlar",st_now:"Showroom'da hazır",st_soon:"geliyor",
+  cats:{sofas:"Kanepeler",armchairs:"Armchair'lar & banklar",chairs:"Sandalyeler",stools:"Bar tabureleri & puflar",tables:"Yemek masaları",coffee:"Orta & yan sehpalar",desks:"Çalışma masaları",consoles:"Konsollar & büfeler",shelves:"Kitaplıklar",beds:"Yatak odası",mirrors:"Aynalar & aksesuar",outdoor:"Dış mekân"}},
+ en:{search:"Search",tab_cat:"Catalogue",eyebrow:"Showroom stock · October 2026",intro:"Pieces available in the showroom right now, with dimensions, finishes and quantities.",h_dims:"Dimensions",h_qty:"In stock",h_fin:"Finishes & materials",h_mat:"Swatches & drawings",h_note:"Codes & notes",ask:"Ask on WhatsApp",next:"Next piece →",zoom:"Zoom",share:"Copy link",copied:"Copied",all:"All brands",pieces:"pieces",pcs:"pcs",photos:"photos",ph:"Search product, brand or designer",none:"No results",results:"Search results",st_all:"All availability",st_now:"In the showroom now",st_soon:"arriving",
+  cats:{sofas:"Sofas",armchairs:"Armchairs & benches",chairs:"Chairs",stools:"Bar stools & poufs",tables:"Dining tables",coffee:"Coffee & side tables",desks:"Desks",consoles:"Consoles & sideboards",shelves:"Bookshelves",beds:"Bedroom",mirrors:"Mirrors & accessories",outdoor:"Outdoor"}}
+};
+const $ = id => document.getElementById(id);
+const norm = s => (s||"").toLocaleLowerCase("tr").normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/ı/g,"i");
+const MONTHS = ["OCAK","ŞUBAT","MART","NİSAN","MAYIS","HAZİRAN","TEMMUZ","AĞUSTOS","EYLÜL","EKİM","KASIM","ARALIK"], MONTHS_EN = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+const NOW = 2026 * 12 + 9;
+const arrival = p => { for (const r of (p.r || [])){ const m = String(r).toLocaleUpperCase("tr").match(/^(OCAK|ŞUBAT|MART|NİSAN|MAYIS|HAZİRAN|TEMMUZ|AĞUSTOS|EYLÜL|EKİM|KASIM|ARALIK)\s+(20\d\d)$/); if (m){ const k = +m[2] * 12 + MONTHS.indexOf(m[1]); if (k > NOW) return k; } } return 0; };
+const monthLbl = k => { const y = Math.floor(k / 12), m = k % 12; return lang === "tr" ? `${MONTHS[m].charAt(0)}${MONTHS[m].slice(1).toLocaleLowerCase("tr")} ${y}` : `${MONTHS_EN[m]} ${y}`; };
+let status = "";
+let lang = localStorage.getItem("mz-lang") || "tr", cat = "sofas", brand = "", query = "", list = [], cur = -1;
+const visible = () => {
+  if (query){ const q = norm(query).split(/\s+/); return DATA.filter(p => { const h = norm([p.b,p.n,p.d,T[lang].cats[p.c]].join(" ")); return q.every(w => h.includes(w)); }); }
+  return DATA.filter(p => p.c === cat && (!brand || p.b === brand) && (!status || (status === "now" ? !arrival(p) : String(arrival(p)) === status)));
+};
+function renderCats(){
+  const el = $("cats"); el.innerHTML = "";
+  CATS.forEach(c => { const n = DATA.filter(p => p.c === c).length; if (!n) return;
+    const b = document.createElement("button"); b.type = "button"; b.innerHTML = `${T[lang].cats[c]}<small>${n}</small>`;
+    b.setAttribute("aria-current", !query && c === cat ? "true" : "false");
+    b.onclick = () => { cat = c; brand = ""; status = ""; query = ""; $("q").value = ""; $("qx").hidden = true; location.hash = c; render(); window.scrollTo({top:0}); };
+    el.append(b); });
+}
+function renderBrands(){
+  const s = $("brandsel"); const bs = [...new Set(DATA.filter(p => p.c === cat).map(p => p.b))].sort((a,b) => a.localeCompare(b));
+  s.innerHTML = ""; s.append(new Option(T[lang].all, ""));
+  bs.forEach(b => s.append(new Option(`${b} (${DATA.filter(p => p.c === cat && p.b === b).length})`, b)));
+  s.value = brand; s.parentElement.hidden = !!query;
+}
+function renderStatus(){
+  const s = $("stsel"), base = DATA.filter(p => p.c === cat && (!brand || p.b === brand));
+  const ks = [...new Set(base.map(arrival).filter(Boolean))].sort((a,b) => a - b);
+  s.innerHTML = ""; s.append(new Option(T[lang].st_all, ""));
+  s.append(new Option(`${T[lang].st_now} (${base.filter(p => !arrival(p)).length})`, "now"));
+  ks.forEach(k => s.append(new Option(`${monthLbl(k)} ${T[lang].st_soon} (${base.filter(p => arrival(p) === k).length})`, String(k))));
+  if (![...s.options].some(o => o.value === status)) status = "";
+  s.value = status; s.parentElement.hidden = !!query || !ks.length;
+}
+function renderGrid(){
+  list = visible(); const g = $("grid"); g.innerHTML = "";
+  $("count").textContent = `${list.length} ${T[lang].pieces}`;
+  if (!list.length){ g.innerHTML = `<p class="empty">${T[lang].none}</p>`; return; }
+  const frag = document.createDocumentFragment();
+  list.forEach((p, i) => {
+    const c = document.createElement("button"); c.className = "card"; c.type = "button";
+    c.innerHTML = `<div class="media"><img loading="lazy" alt=""></div><div class="meta"><span class="br"></span><h3></h3><span class="dm"></span>${p.x ? `<span class="dm">${p.x.length + 1} ${T[lang].photos}</span>` : ""}${arrival(p) ? `<span class="soon">${monthLbl(arrival(p))} ${T[lang].st_soon}</span>` : (p.q ? `<span class="qty">${p.q} ${T[lang].pcs}</span>` : "")}</div>`;
+    const im = c.querySelector("img"); im.src = IMG + p.img; im.alt = `${p.b} ${p.n}`;
+    c.querySelector(".br").textContent = p.b; c.querySelector("h3").textContent = p.n; c.querySelector(".dm").textContent = p.z[0] || "";
+    c.onclick = () => openItem(i);
+    frag.append(c);
+  });
+  g.append(frag);
+}
+function render(){
+  document.documentElement.lang = lang;
+  document.querySelectorAll("[data-t]").forEach(el => { const v = T[lang][el.dataset.t]; if (v) el.textContent = v; });
+  document.querySelectorAll(".lang button").forEach(b => b.setAttribute("aria-pressed", b.dataset.lang === lang));
+  $("q").placeholder = T[lang].ph;
+  $("title").textContent = query ? T[lang].results : T[lang].cats[cat];
+  renderCats(); renderBrands(); renderStatus(); renderGrid();
+}
+let pics = [], pi = 0, lbList = null, lbi = 0;
+function renderGal(){
+  const hero = $("d-hero"); [...hero.children].forEach(c => { if (c.id !== "d-close") c.remove(); });
+  const p = list[cur], g = document.createElement("div"); g.className = "gal";
+  const main = document.createElement("div"); main.className = "gal-main";
+  const img = new Image(); img.alt = `${p.b} ${p.n}`; img.src = IMG + pics[pi]; main.append(img);
+  main.onclick = () => openLB();
+  let sx = null; main.addEventListener("touchstart", e => { sx = e.touches[0].clientX; }, {passive:true});
+  main.addEventListener("touchend", e => { if (sx === null) return; const dx = e.changedTouches[0].clientX - sx; sx = null; if (Math.abs(dx) > 50 && pics.length > 1){ e.preventDefault(); step(dx < 0 ? 1 : -1); } });
+  if (pics.length > 1){
+    const pv = document.createElement("button"); pv.className = "gal-nav prev"; pv.innerHTML = "&#8249;"; pv.setAttribute("aria-label","Previous"); pv.onclick = e => { e.stopPropagation(); step(-1); };
+    const nx = document.createElement("button"); nx.className = "gal-nav next"; nx.innerHTML = "&#8250;"; nx.setAttribute("aria-label","Next"); nx.onclick = e => { e.stopPropagation(); step(1); };
+    main.append(pv, nx);
+  }
+  const z = document.createElement("button"); z.className = "gal-zoom"; z.textContent = T[lang].zoom; z.onclick = e => { e.stopPropagation(); openLB(); }; main.append(z);
+  g.append(main);
+  if (pics.length > 1){
+    const th = document.createElement("div"); th.className = "thumbs";
+    pics.forEach((f, j) => { const b = document.createElement("button"); b.type = "button"; b.setAttribute("aria-current", j === pi); b.setAttribute("aria-label", (j+1) + "/" + pics.length);
+      const ti = new Image(); ti.alt = ""; ti.loading = "lazy"; ti.src = IMG + f; b.append(ti); b.onclick = () => { pi = j; renderGal(); }; th.append(b); });
+    g.append(th);
+  }
+  hero.prepend(g);
+}
+function step(d){ pi = (pi + d + pics.length) % pics.length; renderGal(); if (!$("lb").hidden) loadLB(); }
+function openItem(i){
+  cur = i; const p = list[i]; if (!p) return;
+  pics = [p.img, ...(p.x || [])]; pi = 0; renderGal();
+  $("d-brand").textContent = p.b; $("d-name").textContent = p.n; $("d-des").textContent = p.d; $("d-des").hidden = !p.d;
+  $("d-dims").innerHTML = p.z.map(z => `<p>${z.replace(/[<>&]/g,"")}</p>`).join(""); $("d-dims-row").hidden = !p.z.length;
+  $("d-qty").textContent = p.q ? `${p.q} ${T[lang].pcs}` : ""; $("d-qty-row").hidden = !p.q;
+  $("d-fin").innerHTML = ""; p.f.forEach(z => { const li = document.createElement("li"); li.textContent = z; $("d-fin").append(li); }); $("d-fin-row").hidden = !p.f.length;
+  const url = location.href.split("#")[0] + "#" + p.i;
+  $("d-wa").href = "https://wa.me/?text=" + encodeURIComponent(`${p.b} ${p.n} — İdil's Showroom\n${url}`);
+  $("d-share").textContent = T[lang].share; $("d-share").onclick = () => { navigator.clipboard?.writeText(url); $("d-share").textContent = T[lang].copied; };
+  $("d-mat").innerHTML = ""; (p.m || []).forEach((f, j) => { const b = document.createElement("button"); b.type = "button"; const im = new Image(); im.alt = ""; im.loading = "lazy"; im.src = IMG + f; b.append(im); b.onclick = () => openLB(p.m, j); $("d-mat").append(b); }); $("d-mat-row").hidden = !(p.m && p.m.length);
+  $("d-note").innerHTML = ""; (p.r || []).forEach(z => { const li = document.createElement("li"); li.textContent = z; $("d-note").append(li); }); $("d-note-row").hidden = !(p.r && p.r.length);
+  $("d-next").hidden = i >= list.length - 1;
+  $("sheet").hidden = false; $("sheet").querySelector(".body").scrollTop = 0; document.body.style.overflow = "hidden";
+  history.replaceState(null, "", "#" + p.i);
+}
+function closeItem(){ $("sheet").hidden = true; document.body.style.overflow = ""; history.replaceState(null, "", "#" + cat); }
+function loadLB(){ const p = list[cur]; const L = lbList || pics, k = lbList ? lbi : pi; $("lb-img").src = IMG + L[k]; $("lb-title").textContent = `${p.b} ${p.n}`; $("lb-count").textContent = L.length > 1 ? `${k+1} / ${L.length}` : ""; $("lb-prev").hidden = $("lb-next").hidden = L.length < 2; $("lb-stage").classList.remove("z"); }
+function openLB(list2, k2){ lbList = list2 || null; lbi = k2 || 0; $("lb").hidden = false; loadLB(); }
+function lbStep(d){ if (lbList){ lbi = (lbi + d + lbList.length) % lbList.length; loadLB(); } else step(d); }
+$("lb-close").onclick = () => { $("lb").hidden = true; };
+$("lb-prev").onclick = e => { e.stopPropagation(); lbStep(-1); };
+$("lb-next").onclick = e => { e.stopPropagation(); lbStep(1); };
+$("lb-stage").onclick = e => { const st = $("lb-stage"), im = $("lb-img"); if (!st.classList.contains("z")){ const r = st.getBoundingClientRect(); im.style.transformOrigin = `${(e.clientX-r.left)/r.width*100}% ${(e.clientY-r.top)/r.height*100}%`; } st.classList.toggle("z"); };
+$("d-close").onclick = closeItem;
+$("d-next").onclick = () => openItem(cur + 1);
+document.addEventListener("keydown", e => { if (!$("lb").hidden){ if (e.key === "Escape") $("lb").hidden = true; if (e.key === "ArrowLeft") lbStep(-1); if (e.key === "ArrowRight") lbStep(1); return; } if ($("sheet").hidden) return; if (e.key === "Escape") closeItem(); if (pics.length > 1 && e.key === "ArrowLeft") step(-1); if (pics.length > 1 && e.key === "ArrowRight") step(1); });
+$("brandsel").onchange = e => { brand = e.target.value; renderStatus(); renderGrid(); };
+$("stsel").onchange = e => { status = e.target.value; renderGrid(); };
+let qt; $("q").addEventListener("input", e => { clearTimeout(qt); qt = setTimeout(() => { const v = e.target.value.trim(); query = v.length >= 2 ? v : ""; $("qx").hidden = !e.target.value; render(); }, 150); });
+$("qx").onclick = () => { $("q").value = ""; query = ""; $("qx").hidden = true; render(); $("q").focus(); };
+$("search-btn").onclick = () => { window.scrollTo({top:0, behavior:"smooth"}); $("q").focus(); };
+document.querySelectorAll(".lang button").forEach(b => b.onclick = () => { lang = b.dataset.lang; try { localStorage.setItem("mz-lang", lang); } catch(e){} render(); });
+(function init(){
+  const h = decodeURIComponent(location.hash.slice(1));
+  if (CATS.includes(h)) cat = h;
+  const item = DATA.find(p => p.i === h);
+  if (item) cat = item.c;
+  render();
+  if (item) openItem(list.indexOf(item));
+})();
+</script>
+</body>
+</html>
