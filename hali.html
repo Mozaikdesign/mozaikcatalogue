@@ -1,0 +1,360 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Halı · Mozaik</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F4F4F3;--surface:#FFFFFF;--ink:#111111;--muted:#77777A;--line:#E3E3E1;--mz-red:#BE202E;--body:"Archivo",system-ui,-apple-system,"Segoe UI",sans-serif;--display:"Archivo",system-ui,-apple-system,"Segoe UI",sans-serif}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font:15px/1.5 var(--body);-webkit-font-smoothing:antialiased}
+a{color:var(--ink);text-decoration:none}
+a:hover{color:var(--mz-red)}
+button{font:inherit;color:inherit;cursor:pointer}
+img{display:block;max-width:100%}
+:focus-visible{outline:2px solid var(--mz-red);outline-offset:2px}
+.wrap{max-width:1400px;margin:0 auto;padding-inline:clamp(16px,4vw,48px)}
+header{position:sticky;top:0;z-index:5;background:color-mix(in srgb,var(--bg) 94%,transparent);backdrop-filter:blur(10px)}
+.bar{display:flex;align-items:center;gap:20px;padding-block:18px}
+.brand{display:flex;align-items:center;gap:16px}
+.mz-logo{display:block;height:24px;width:auto;color:var(--ink)}
+.brand small{font:500 .64rem/1 var(--body);letter-spacing:.16em;text-transform:uppercase;color:var(--muted);padding-left:16px;border-left:1px solid var(--line)}
+.sp{flex:1}
+.search-btn{display:flex;align-items:center;gap:8px;height:36px;padding:0 14px;border:1px solid var(--ink);background:none;font:600 .7rem/1 var(--body);letter-spacing:.12em;text-transform:uppercase}
+.search-btn svg{width:16px;height:16px}
+.search-btn:hover{background:var(--ink);color:var(--bg)}
+.lang{display:flex;border:1px solid var(--line)}
+.lang button{border:0;background:none;padding:8px 12px;font-size:.7rem;font-weight:600;letter-spacing:.12em}
+.lang button[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
+.sitetabs{display:flex;justify-content:center;gap:28px;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.sitetabs a{padding:12px 0;font:600 .72rem/1 var(--body);letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+.sitetabs a:hover{color:var(--ink)}
+.sitetabs a[aria-current="page"]{color:var(--ink);box-shadow:inset 0 -2px 0 var(--mz-red)}
+.searchrow{position:relative;margin-top:14px}
+.searchrow input{width:100%;font:inherit;font-size:.92rem;padding:14px 40px 14px 30px;border:0;border-bottom:1px solid var(--ink);background:transparent;color:var(--ink);border-radius:0}
+.searchrow input:focus{outline:none;border-bottom-color:var(--mz-red)}
+.searchrow svg{position:absolute;left:2px;top:50%;transform:translateY(-50%);width:18px;height:18px;pointer-events:none}
+.searchrow .qx{position:absolute;right:0;top:50%;transform:translateY(-50%);border:0;background:none;width:32px;height:32px;font-size:1.1rem}
+.intro{display:grid;justify-items:center;text-align:center;gap:10px;padding-block:40px 28px}
+.eyebrow{font-size:.66rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+.intro h1{margin:0;font:500 clamp(3.2rem,10vw,7.5rem)/.95 var(--display);letter-spacing:-.05em;text-wrap:balance}
+.intro p{margin:6px 0 0;max-width:52ch;font-size:.88rem;color:var(--muted);text-wrap:pretty}
+.cats{display:flex;flex-wrap:wrap;justify-content:center;gap:6px}
+.cats button{border:1px solid transparent;background:none;padding:10px 14px;font:500 .72rem/1 var(--body);letter-spacing:.14em;text-transform:uppercase}
+.cats button small{font-size:.62rem;margin-left:5px;color:var(--muted)}
+.cats button[aria-current="true"]{border-color:var(--ink)}
+.tools{display:flex;align-items:center;gap:16px;flex-wrap:wrap;padding-block:22px 18px}
+.sel{position:relative}
+.sel select{appearance:none;-webkit-appearance:none;border:1px solid var(--ink);border-radius:0;background:transparent;color:var(--ink);font:600 .7rem/1 var(--body);letter-spacing:.12em;text-transform:uppercase;height:36px;padding:0 34px 0 12px;max-width:62vw}
+.sel::after{content:"";position:absolute;right:13px;top:50%;width:6px;height:6px;border-right:1.5px solid var(--ink);border-bottom:1.5px solid var(--ink);transform:translateY(-70%) rotate(45deg);pointer-events:none}
+.count{margin-left:auto;font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,280px),1fr));gap:12px;padding-bottom:64px}
+.card{all:unset;cursor:pointer;display:flex;flex-direction:column;background:var(--surface);padding:14px 14px 18px;min-width:0}
+.card:focus-visible{outline:2px solid var(--mz-red);outline-offset:2px}
+.media{aspect-ratio:4/3;background:#fff;overflow:hidden}
+.media img{width:100%;height:100%;object-fit:contain;transition:transform .5s ease}
+.card:hover .media img{transform:scale(1.03)}
+.meta{margin-top:14px;display:grid;gap:3px}
+.meta .br{font-size:.62rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+.meta h3{margin:0;font:500 .92rem/1.3 var(--body);letter-spacing:-.01em}
+.meta .dm{font-size:.74rem;color:var(--muted)}
+.qty{justify-self:start;margin-top:6px;font-size:.62rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;padding:4px 8px;border:1px solid var(--ink)}
+.soon{justify-self:start;margin-top:6px;font-size:.62rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;padding:4px 8px;background:var(--ink);color:var(--bg)}
+.brands{display:flex;flex-direction:column;align-items:center;padding-top:22px}
+.brands .brand-toggle{display:flex;align-items:baseline;gap:10px;padding:10px 0;border:0;border-bottom:1px solid var(--ink);background:none;color:var(--ink);font:600 .7rem/1 var(--body);letter-spacing:.14em;text-transform:uppercase;cursor:pointer}
+.brands .brand-toggle span{color:var(--muted)}
+.brands .brand-toggle b{font-weight:600}
+.brands .brand-toggle .chev{display:inline-block;width:6px;height:6px;margin-left:4px;border-right:1.5px solid var(--ink);border-bottom:1.5px solid var(--ink);transform:translateY(-3px) rotate(45deg);transition:transform .2s ease}
+.brands .brand-toggle[aria-expanded="true"] .chev{transform:translateY(0) rotate(-135deg)}
+.brand-list{display:flex;flex-wrap:wrap;justify-content:center;gap:6px 22px;padding-top:14px;max-width:900px}
+.brand-list button{display:flex;align-items:center;gap:4px;border:0;background:none;padding:6px 0;font:500 .72rem/1 var(--body);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.brand-list button small{font-size:.62rem;letter-spacing:0;vertical-align:super;color:var(--muted)}
+.brand-list button:hover{color:var(--ink)}
+.brand-list button[aria-pressed="true"]{color:var(--ink);box-shadow:inset 0 -1px 0 var(--ink)}
+@media (max-width:640px){
+  .brands{align-items:stretch;padding-top:10px}
+  .brands .brand-toggle{width:100%;padding:14px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .brands .brand-toggle .chev{margin-left:auto}
+  .brand-list{display:grid;grid-template-columns:1fr 1fr;gap:0 16px;padding-top:4px;border-bottom:1px solid var(--line)}
+  .brand-list button{justify-content:space-between;padding:13px 0;border-bottom:1px solid var(--line)}
+}
+.empty{grid-column:1/-1;text-align:center;padding:60px 0;color:var(--muted)}
+.sheet{position:fixed;inset:0;z-index:20;display:grid;grid-template-columns:1.25fr 1fr;background:var(--surface)}
+[hidden]{display:none!important}
+.sheet .hero{position:relative;background:#fff;min-height:0}
+.sheet .body{overflow-y:auto;padding:calc(env(safe-area-inset-top,0px) + 28px) clamp(20px,4vw,48px) calc(env(safe-area-inset-bottom,0px) + 40px);min-width:0}
+.close{position:absolute;top:calc(env(safe-area-inset-top,0px) + 16px);left:16px;z-index:3;border:1px solid var(--line);background:var(--surface);width:48px;height:48px;font-size:1.4rem;line-height:1}
+.sheet .eyebrow{font-size:.66rem;letter-spacing:.2em}
+.sheet h2{font:500 clamp(2.2rem,4.4vw,3.4rem)/1 var(--display);letter-spacing:-.04em;margin:8px 0 6px}
+.sheet .by{color:var(--muted);margin:0 0 28px}
+.spec{border-top:1px solid var(--line);padding-block:18px;display:grid;grid-template-columns:150px 1fr;gap:16px}
+.spec h4{margin:0;font-size:.72rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);padding-top:3px}
+.spec p{margin:0}
+.spec ul{margin:0;padding:0;list-style:none;display:flex;flex-wrap:wrap;gap:8px}
+.spec li{border:1px solid var(--line);padding:5px 12px;font-size:.88rem}
+.spec ul.plain{display:grid;gap:4px}
+.spec ul.plain li{border:0;padding:0;font-size:.95rem}
+.spec ul.codes li{font-size:.78rem;color:var(--muted);font-variant-numeric:tabular-nums}
+.mats{display:grid;grid-template-columns:repeat(auto-fill,minmax(72px,1fr));gap:8px}
+.mats button{aspect-ratio:1;border:1px solid var(--line);background:#fff;padding:0;cursor:zoom-in}
+.mats img{width:100%;height:100%;object-fit:contain}
+.actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+.btn{display:inline-flex;align-items:center;border:1px solid var(--ink);background:none;color:var(--ink);padding:14px 20px;font:600 .76rem/1 var(--body);letter-spacing:.1em;text-transform:uppercase;text-decoration:none}
+.btn:hover{background:var(--ink);color:var(--bg)}
+.btn.primary{background:var(--ink);color:var(--bg)}
+.btn.primary:hover{background:var(--mz-red);border-color:var(--mz-red);color:#fff}
+.gal{position:absolute;inset:0;display:flex;flex-direction:column;background:#FFFFFF}
+.gal-main{position:relative;flex:1;min-height:0;cursor:zoom-in;touch-action:pan-y}
+.gal-main img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;padding:5%}
+.gal-nav{position:absolute;top:50%;transform:translateY(-50%);z-index:2;border:0;width:48px;height:48px;background:rgb(255 255 255 / .9);color:#1B1D1F;font-size:1.4rem;box-shadow:0 2px 10px rgb(0 0 0 / .15)}
+.gal-nav.prev{left:16px}.gal-nav.next{right:16px}
+.gal-zoom{position:absolute;right:16px;bottom:16px;z-index:2;border:0;padding:10px 16px;background:rgb(27 29 31 / .82);color:#FFFFFF;font-size:.82rem;font-weight:600;letter-spacing:.04em}
+.thumbs{display:flex;gap:8px;padding:10px 12px;overflow-x:auto;background:#F2F1EE;flex:none}
+.thumbs button{flex:none;width:76px;height:54px;border:2px solid transparent;padding:0;background:#FFFFFF;overflow:hidden}
+.thumbs button[aria-current="true"]{border-color:#1B1D1F}
+.thumbs img{width:100%;height:100%;object-fit:contain}
+.lb{position:fixed;inset:0;z-index:40;background:#0E0F0F;color:#FFFFFF;display:flex;flex-direction:column}
+.lb-top{display:flex;align-items:center;gap:12px;padding:calc(env(safe-area-inset-top,0px) + 12px) 16px 12px}
+.lb-title{flex:1;min-width:0;font:500 1.3rem/1.2 var(--display);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lb-count{font-size:.85rem;color:#B9BBB6;font-variant-numeric:tabular-nums}
+.lb-btn{border:1px solid rgb(255 255 255 / .25);background:none;color:#FFFFFF;width:44px;height:44px;font-size:1.25rem;line-height:1}
+.lb-stage{position:relative;flex:1;min-height:0;overflow:hidden;background:#FFFFFF;cursor:zoom-in;touch-action:pinch-zoom}
+.lb-stage img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;transition:transform .25s ease;transform-origin:center}
+.lb-stage.z{cursor:zoom-out}
+.lb-stage.z img{transform:scale(2.2)}
+.lb-nav{position:absolute;top:50%;transform:translateY(-50%);z-index:2;border:0;width:52px;height:52px;background:rgb(27 29 31 / .7);color:#FFFFFF;font-size:1.5rem}
+.lb-nav.prev{left:16px}.lb-nav.next{right:16px}
+footer{border-top:1px solid var(--line);padding-block:28px;font-size:.74rem;color:var(--muted)}
+footer .wrap{display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+@media (max-width:820px){
+  .sheet{grid-template-columns:1fr;grid-template-rows:48vh 1fr}
+  .gal-nav{width:40px;height:40px}
+  .spec{grid-template-columns:1fr;gap:6px}
+}
+@media (max-width:640px){
+  .bar{padding-block:12px;gap:10px}
+  .mz-logo{height:20px}
+  .brand small{display:none}
+  .search-btn{padding:0 10px;height:34px}
+  .search-btn span{display:none}
+  .sitetabs{gap:22px}
+  .searchrow input{font-size:16px;padding-block:12px}
+  .intro{justify-items:start;text-align:left;padding-block:22px 14px}
+  .intro h1{font-size:clamp(2.2rem,11vw,3rem)}
+  .intro p{display:none}
+  .cats{flex-wrap:nowrap;justify-content:flex-start;overflow-x:auto;scrollbar-width:none;margin-inline:-16px;padding-inline:16px}
+  .cats::-webkit-scrollbar{display:none}
+  .cats button{flex:none;white-space:nowrap;padding:10px}
+  .tools{padding-block:14px 12px;gap:8px}
+  .sel select{font-size:16px;letter-spacing:0;text-transform:none;font-weight:500;height:34px}
+  .count{display:none}
+  .grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:4px}
+  .card{padding:8px 8px 12px}
+  .meta{margin-top:8px}
+  .meta h3{font-size:.8rem}
+  .meta .dm{font-size:.68rem}
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap bar">
+    <a class="brand" href="index.html"><svg class="mz-logo" viewBox="0 0 279.20 60.37" role="img" aria-label="Mozaik"><g transform="translate(-162.45 723.77) scale(1 -1)"><path fill="currentColor" d="M225.6 700.21C228.51 697.29 229.96 692.79 229.96 686.97L229.96 664.07L218.45 664.07L218.45 685.25C218.45 688.43 217.78 690.81 216.46 692.4C215.14 693.99 213.28 694.78 210.9 694.78C208.12 694.78 206 693.85 204.41 692.13C202.83 690.41 202.03 687.76 202.03 684.32L202.03 664.2L190.38 664.2L190.38 685.38C190.38 691.73 187.87 694.78 182.83 694.78C180.19 694.78 178.07 693.85 176.48 692.13C174.89 690.41 174.1 687.76 174.1 684.32L174.1 664.2L162.45 664.2L162.45 704.05L173.44 704.05L173.44 699.41C174.89 701.13 176.74 702.33 178.86 703.25C180.98 704.18 183.36 704.58 186.01 704.58C188.79 704.58 191.44 704.05 193.69 702.86C195.94 701.8 197.79 700.08 199.25 697.96C200.84 700.08 202.96 701.66 205.47 702.86C207.99 704.05 210.77 704.58 213.68 704.58C218.71 704.71 222.68 703.25 225.6 700.21"></path><path fill="currentColor" d="M267.3 675.98C269.15 677.97 270.21 680.62 270.21 684.06C270.21 687.37 269.28 690.15 267.3 692.13C265.44 694.12 262.93 695.18 260.02 695.18C257.1 695.18 254.59 694.12 252.6 692.13C250.62 690.15 249.69 687.5 249.69 684.06C249.69 680.75 250.62 677.97 252.6 675.98C254.59 674 256.97 672.94 260.02 672.94C262.93 672.94 265.31 674 267.3 675.98M248.63 666.05C245.32 667.77 242.67 670.29 240.82 673.33C238.97 676.51 238.04 679.95 238.04 683.92C238.04 687.9 238.97 691.47 240.82 694.52C242.67 697.69 245.32 700.08 248.63 701.8C251.94 703.52 255.78 704.44 260.02 704.44C264.25 704.44 267.96 703.52 271.27 701.8C274.58 700.08 277.23 697.56 279.08 694.52C280.93 691.34 281.86 687.9 281.86 683.92C281.86 679.95 280.93 676.38 279.08 673.33C277.23 670.16 274.58 667.77 271.27 666.05C267.96 664.33 264.12 663.4 260.02 663.4C255.65 663.4 251.94 664.33 248.63 666.05"></path><path fill="currentColor" d="M322.11 672.94L322.11 664.07L286.36 664.07L286.36 671.08L306.75 695.18L286.89 695.18L286.89 704.05L321.44 704.05L321.44 697.03L301.06 672.94Z"></path><path fill="currentColor" d="M350.04 672.67C351.63 673.6 352.69 674.92 353.35 676.78L353.35 680.75L345.4 680.75C340.64 680.75 338.26 679.16 338.26 676.11C338.26 674.66 338.79 673.47 339.98 672.54C341.17 671.61 342.76 671.22 344.74 671.22C346.73 671.22 348.45 671.74 350.04 672.67M359.97 700.21C363.28 697.3 365 692.79 365 686.84L365 663.93L354.14 663.93L354.14 668.96C352.02 665.26 347.92 663.4 341.96 663.4C338.92 663.4 336.27 663.93 334.02 664.99C331.77 666.05 330.05 667.51 328.86 669.36C327.67 671.22 327.14 673.33 327.14 675.58C327.14 679.29 328.59 682.2 331.37 684.32C334.15 686.44 338.52 687.5 344.35 687.5L353.61 687.5C353.61 690.01 352.82 692 351.36 693.32C349.77 694.65 347.52 695.31 344.48 695.31C342.36 695.31 340.24 694.91 338.26 694.25C336.14 693.59 334.42 692.66 332.96 691.47L328.86 699.55C330.97 701.13 333.62 702.33 336.67 703.12C339.71 703.91 342.89 704.44 346.07 704.44C351.76 704.71 356.53 703.25 359.97 700.21"></path><path fill="currentColor" d="M375.33 677.44L386.98 677.44L386.98 664.07L375.33 664.07Z"></path><path fill="currentColor" d="M375.33 701.27L386.98 701.27L386.98 687.9L375.33 687.9Z"></path><path fill="#be202e" d="M375.33 723.77L386.98 723.77L386.98 710.4L375.33 710.4Z"></path><path fill="currentColor" d="M414.91 679.69L409.35 674.13L409.35 663.93L397.7 663.93L397.7 723.77L409.35 723.77L409.35 687.9L426.29 704.05L440.19 704.05L423.51 687.1L441.65 664.07L427.62 664.07Z"></path></g></svg><small data-t="tab_rug">Halı</small></a>
+    <div class="sp"></div>
+    <button class="search-btn" type="button" id="search-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.5-3.5"></path></svg><span data-t="search">Ara</span></button>
+    <div class="lang" role="group" aria-label="Language"><button data-lang="tr" aria-pressed="true">TR</button><button data-lang="en" aria-pressed="false">EN</button></div>
+  </div>
+  <nav class="sitetabs wrap" aria-label="Sections"><a href="index.html" data-t="tab_cat">Katalog</a><a href="showroom.html">Güncel Stok</a><a href="hali.html" aria-current="page" data-t="tab_rug">Halı</a><a href="aydinlatma.html" data-t="tab_light">Aydınlatma</a><a href="https://mozaikoutlet.com" target="_blank" rel="noopener">Mozaik Outlet</a></nav>
+</header>
+<main class="wrap">
+  <div class="searchrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.5-3.5"></path></svg><input id="q" type="search" autocomplete="off"><button class="qx" id="qx" hidden aria-label="Clear">×</button></div>
+  <div class="brands" id="brands" role="group" aria-label="Brand"></div>
+  <section class="intro"><div class="eyebrow" data-t="eyebrow">Halı · Depo stoğu</div><h1 id="title">İç mekân halıları</h1><p data-t="intro">Depoda hazır bulunan halılar. Ölçü, renk ve adet bilgisiyle.</p></section>
+  <nav class="cats" id="cats" aria-label="Categories"></nav>
+  <div class="tools"><div class="sel"><select id="stsel" aria-label="Status"></select></div><span class="count" id="count"></span></div>
+  <div class="grid" id="grid"></div>
+</main>
+<footer><div class="wrap"><svg class="mz-logo" viewBox="0 0 279.20 60.37" role="img" aria-label="Mozaik"><g transform="translate(-162.45 723.77) scale(1 -1)"><path fill="currentColor" d="M225.6 700.21C228.51 697.29 229.96 692.79 229.96 686.97L229.96 664.07L218.45 664.07L218.45 685.25C218.45 688.43 217.78 690.81 216.46 692.4C215.14 693.99 213.28 694.78 210.9 694.78C208.12 694.78 206 693.85 204.41 692.13C202.83 690.41 202.03 687.76 202.03 684.32L202.03 664.2L190.38 664.2L190.38 685.38C190.38 691.73 187.87 694.78 182.83 694.78C180.19 694.78 178.07 693.85 176.48 692.13C174.89 690.41 174.1 687.76 174.1 684.32L174.1 664.2L162.45 664.2L162.45 704.05L173.44 704.05L173.44 699.41C174.89 701.13 176.74 702.33 178.86 703.25C180.98 704.18 183.36 704.58 186.01 704.58C188.79 704.58 191.44 704.05 193.69 702.86C195.94 701.8 197.79 700.08 199.25 697.96C200.84 700.08 202.96 701.66 205.47 702.86C207.99 704.05 210.77 704.58 213.68 704.58C218.71 704.71 222.68 703.25 225.6 700.21"></path><path fill="currentColor" d="M267.3 675.98C269.15 677.97 270.21 680.62 270.21 684.06C270.21 687.37 269.28 690.15 267.3 692.13C265.44 694.12 262.93 695.18 260.02 695.18C257.1 695.18 254.59 694.12 252.6 692.13C250.62 690.15 249.69 687.5 249.69 684.06C249.69 680.75 250.62 677.97 252.6 675.98C254.59 674 256.97 672.94 260.02 672.94C262.93 672.94 265.31 674 267.3 675.98M248.63 666.05C245.32 667.77 242.67 670.29 240.82 673.33C238.97 676.51 238.04 679.95 238.04 683.92C238.04 687.9 238.97 691.47 240.82 694.52C242.67 697.69 245.32 700.08 248.63 701.8C251.94 703.52 255.78 704.44 260.02 704.44C264.25 704.44 267.96 703.52 271.27 701.8C274.58 700.08 277.23 697.56 279.08 694.52C280.93 691.34 281.86 687.9 281.86 683.92C281.86 679.95 280.93 676.38 279.08 673.33C277.23 670.16 274.58 667.77 271.27 666.05C267.96 664.33 264.12 663.4 260.02 663.4C255.65 663.4 251.94 664.33 248.63 666.05"></path><path fill="currentColor" d="M322.11 672.94L322.11 664.07L286.36 664.07L286.36 671.08L306.75 695.18L286.89 695.18L286.89 704.05L321.44 704.05L321.44 697.03L301.06 672.94Z"></path><path fill="currentColor" d="M350.04 672.67C351.63 673.6 352.69 674.92 353.35 676.78L353.35 680.75L345.4 680.75C340.64 680.75 338.26 679.16 338.26 676.11C338.26 674.66 338.79 673.47 339.98 672.54C341.17 671.61 342.76 671.22 344.74 671.22C346.73 671.22 348.45 671.74 350.04 672.67M359.97 700.21C363.28 697.3 365 692.79 365 686.84L365 663.93L354.14 663.93L354.14 668.96C352.02 665.26 347.92 663.4 341.96 663.4C338.92 663.4 336.27 663.93 334.02 664.99C331.77 666.05 330.05 667.51 328.86 669.36C327.67 671.22 327.14 673.33 327.14 675.58C327.14 679.29 328.59 682.2 331.37 684.32C334.15 686.44 338.52 687.5 344.35 687.5L353.61 687.5C353.61 690.01 352.82 692 351.36 693.32C349.77 694.65 347.52 695.31 344.48 695.31C342.36 695.31 340.24 694.91 338.26 694.25C336.14 693.59 334.42 692.66 332.96 691.47L328.86 699.55C330.97 701.13 333.62 702.33 336.67 703.12C339.71 703.91 342.89 704.44 346.07 704.44C351.76 704.71 356.53 703.25 359.97 700.21"></path><path fill="currentColor" d="M375.33 677.44L386.98 677.44L386.98 664.07L375.33 664.07Z"></path><path fill="currentColor" d="M375.33 701.27L386.98 701.27L386.98 687.9L375.33 687.9Z"></path><path fill="#be202e" d="M375.33 723.77L386.98 723.77L386.98 710.4L375.33 710.4Z"></path><path fill="currentColor" d="M414.91 679.69L409.35 674.13L409.35 663.93L397.7 663.93L397.7 723.77L409.35 723.77L409.35 687.9L426.29 704.05L440.19 704.05L423.51 687.1L441.65 664.07L427.62 664.07Z"></path></g></svg><span>© 2026 Mozaik Design · <span data-t="tab_rug">Halı</span></span></div></footer>
+<div class="sheet" id="sheet" hidden role="dialog" aria-modal="true" aria-labelledby="d-name">
+  <div class="hero" id="d-hero"><button class="close" id="d-close" aria-label="Close">&times;</button></div>
+  <div class="body">
+    <div class="eyebrow" id="d-brand"></div>
+    <h2 id="d-name"></h2>
+    <p class="by" id="d-des"></p>
+    <div class="spec" id="d-dims-row"><h4 data-t="h_dims">Ölçüler</h4><div id="d-dims"></div></div>
+    <div class="spec" id="d-qty-row"><h4 data-t="h_qty">Stok</h4><p id="d-qty"></p></div>
+    <div class="spec" id="d-fin-row"><h4 data-t="h_fin">Renk</h4><ul class="plain" id="d-fin"></ul></div>
+    <div class="spec" id="d-mat-row"><h4 data-t="h_mat">Detaylar</h4><div class="mats" id="d-mat"></div></div>
+    <div class="spec" id="d-note-row"><h4 data-t="h_note">Kodlar & notlar</h4><ul class="plain codes" id="d-note"></ul></div>
+    <div class="actions">
+      <button class="btn primary" id="d-share" type="button" data-t="share">Linki kopyala</button>
+      <a class="btn" id="d-wa" target="_blank" rel="noopener" data-t="ask">WhatsApp ile sor</a>
+      <button class="btn" id="d-next" type="button" data-t="next">Sonraki parça →</button>
+    </div>
+  </div>
+</div>
+<div class="lb" id="lb" hidden role="dialog" aria-modal="true" aria-label="Photo viewer">
+  <div class="lb-top"><div class="lb-title" id="lb-title"></div><span class="lb-count" id="lb-count"></span><button class="lb-btn" id="lb-close" aria-label="Close">&times;</button></div>
+  <div class="lb-stage" id="lb-stage"><img id="lb-img" alt="" draggable="false"><button class="lb-nav prev" id="lb-prev" aria-label="Previous">&#8249;</button><button class="lb-nav next" id="lb-next" aria-label="Next">&#8250;</button></div>
+</div>
+  <div class="body">
+    <div class="br" id="d-brand"></div><h2 id="d-name"></h2><div class="ds" id="d-des"></div>
+    <div class="spec" id="d-dims-row"><h4 data-t="h_dims">Ölçüler</h4><ul id="d-dims"></ul></div>
+    <div class="spec" id="d-qty-row"><h4 data-t="h_qty">Stok</h4><p id="d-qty"></p></div>
+    <div class="spec" id="d-fin-row"><h4 data-t="h_fin">Renk</h4><ul id="d-fin"></ul></div>
+    <div class="acts"><a class="btn" id="d-wa" target="_blank" rel="noopener" data-t="ask">WhatsApp ile sor</a><button class="btn ghost" id="d-share" type="button" data-t="share">Linki kopyala</button></div>
+  </div>
+  <div class="nav"><button id="d-prev" aria-label="Previous">←</button><button id="d-next" aria-label="Next">→</button></div>
+</div></div>
+<script>
+const IMG = "hali/";
+const DATA = [{"i":"h2","c":"indoor","b":"Cassina","n":"Tenere Carpet – Polychrome","d":"","z":["350 cm x 250 cm"],"q":1,"f":["Vinaccia"],"img":"image2.jpg","m":["image4.jpg","image3.jpg"]},{"i":"h3","c":"indoor","b":"Cassina","n":"Sahara Midgrid","d":"","z":["350 cm x 250 cm"],"q":1,"f":["carta da zucchero / grey-blue"],"img":"image5.jpg","m":["image7.jpg","image6.jpg"],"r":["084 M3 30"]},{"i":"h4","c":"indoor","b":"Maxalto","n":"Auris Carpet","d":"","z":["350 cm x 250 cm"],"q":1,"f":[],"img":"image9.jpg","m":["image8.jpg","image10.jpg"],"r":["084 M3 30"]},{"i":"h5","c":"indoor","b":"Maxalto","n":"Auris Carpet","d":"","z":["300 cm x 400 cm"],"q":1,"f":[],"img":"image9.jpg","m":["image11.jpg","image10.jpg"]},{"i":"h6","c":"indoor","b":"Maxalto","n":"Caldes Carpet","d":"","z":["Ø 300 cm"],"q":1,"f":["Teal Blue 0429M"],"img":"image13.jpg","m":["image12.jpg"]},{"i":"h7","c":"indoor","b":"Maxalto","n":"Diakos Carpet","d":"","z":["250 cm x 350 cm"],"q":1,"f":[],"img":"image14.jpg","m":["image16.jpg","image15.jpg"]},{"i":"h8","c":"indoor","b":"B&B Italia","n":"Tima Carpet","d":"","z":["250 cm x 350 cm"],"q":1,"f":[],"img":"image17.jpg","m":["image18.jpg","image19.jpg"]},{"i":"h9","c":"indoor","b":"B&B Italia","n":"Istos Carpet","d":"","z":["250 cm x 350 cm"],"q":1,"f":["Dark Grey"],"img":"image22.jpg","m":["image20.jpg","image21.jpg"]},{"i":"h11","c":"outdoor","b":"B&B Italia","n":"Twist Carpet","d":"","z":["300 cm x 400 cm"],"q":1,"f":[],"img":"image23.jpg","m":["image25.jpg","image24.jpg"]},{"i":"h12","c":"outdoor","b":"B&B Italia","n":"Twist Carpet","d":"","z":["250 cm x 350 cm"],"q":1,"f":[],"img":"image23.jpg","m":["image26.jpg","image24.jpg"]},{"i":"h13","c":"outdoor","b":"B&B Italia","n":"Twist Carpet","d":"","z":["300 cm x 400 cm"],"q":1,"f":[],"img":"image23.jpg","m":["image25.jpg","image27.jpg"]},{"i":"h14","c":"outdoor","b":"B&B Italia","n":"Twist Carpet","d":"","z":["250 cm x 350 cm"],"q":1,"f":[],"img":"image23.jpg","m":["image26.jpg","image27.jpg"]},{"i":"h15","c":"outdoor","b":"B&B Italia","n":"Twist Carpet","d":"","z":["300 cm x 200 cm"],"q":1,"f":[],"img":"image23.jpg","m":["image28.jpg","image27.jpg"]},{"i":"h16","c":"outdoor","b":"B&B Italia","n":"Twist Carpet","d":"","z":["250 cm x 350 cm"],"q":1,"f":[],"img":"image23.jpg","m":["image26.jpg","image29.jpg"]},{"i":"h17","c":"outdoor","b":"B&B Italia","n":"Twist Carpet","d":"","z":["250 cm x 350 cm"],"q":1,"f":[],"img":"image23.jpg","m":["image26.jpg","image30.jpg"]},{"i":"h18","c":"outdoor","b":"B&B Italia","n":"Kyra Carpet","d":"","z":["300 cm x 200 cm"],"q":1,"f":[],"img":"image32.jpg","m":["image31.jpg","image33.jpg"]},{"i":"h19","c":"outdoor","b":"Cassina","n":"Soleil Carpet","d":"","z":["300 cm x 400 cm"],"q":1,"f":[],"img":"image34.jpg","m":["image35.jpg"]},{"i":"h20","c":"outdoor","b":"Cassina","n":"Trail Carpet","d":"","z":["400 cm x 300 cm"],"q":1,"f":["Terracotta"],"img":"image36.jpg","m":["image38.jpg","image37.jpg"]},{"i":"h21","c":"outdoor","b":"Paola Lenti","n":"Air Carpet","d":"","z":["250 cm x 350 cm"],"q":1,"f":[],"img":"image39.jpg","m":["image41.jpg","image40.jpg"]}];
+const CATS = ["indoor","outdoor"];
+const T = {
+ tr:{search:"Ara",tab_cat:"Katalog",tab_light:"Aydınlatma",tab_rug:"Halı",eyebrow:"Halı · Depo stoğu",intro:"Depoda hazır bulunan halılar. Ölçü, renk ve adet bilgisiyle.",h_dims:"Ölçüler",h_qty:"Stok",h_fin:"Renk",h_mat:"Detaylar",h_note:"Kodlar & notlar",ask:"WhatsApp ile sor",next:"Sonraki parça →",zoom:"Yakınlaştır",share:"Linki kopyala",copied:"Kopyalandı",all:"Tüm markalar",brandsTab:"Markalar",pieces:"halı",pcs:"adet",photos:"fotoğraf",ph:"Ürün, marka veya tasarımcı ara",none:"Sonuç bulunamadı",results:"Arama sonuçları",st_all:"Tüm durumlar",st_now:"Showroom'da hazır",st_soon:"geliyor",
+  cats:{indoor:"İç mekân halıları",outdoor:"Dış mekân halıları"}},
+ en:{search:"Search",tab_cat:"Catalogue",tab_light:"Lighting",tab_rug:"Carpets",eyebrow:"Carpets · Warehouse stock",intro:"Carpets available from the warehouse, with dimensions, colours and quantities.",h_dims:"Dimensions",h_qty:"In stock",h_fin:"Colour",h_mat:"Details",h_note:"Codes & notes",ask:"Ask on WhatsApp",next:"Next piece →",zoom:"Zoom",share:"Copy link",copied:"Copied",all:"All brands",brandsTab:"Brands",pieces:"carpets",pcs:"pcs",photos:"photos",ph:"Search product, brand or designer",none:"No results",results:"Search results",st_all:"All availability",st_now:"In the showroom now",st_soon:"arriving",
+  cats:{indoor:"Indoor carpets",outdoor:"Outdoor carpets"}}
+};
+const $ = id => document.getElementById(id);
+const norm = s => (s||"").toLocaleLowerCase("tr").normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/ı/g,"i");
+const MONTHS = ["OCAK","ŞUBAT","MART","NİSAN","MAYIS","HAZİRAN","TEMMUZ","AĞUSTOS","EYLÜL","EKİM","KASIM","ARALIK"], MONTHS_EN = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+const NOW = 2026 * 12 + 9;
+const arrival = p => { for (const r of (p.r || [])){ const m = String(r).toLocaleUpperCase("tr").match(/^(OCAK|ŞUBAT|MART|NİSAN|MAYIS|HAZİRAN|TEMMUZ|AĞUSTOS|EYLÜL|EKİM|KASIM|ARALIK)\s+(20\d\d)$/); if (m){ const k = +m[2] * 12 + MONTHS.indexOf(m[1]); if (k > NOW) return k; } } return 0; };
+const monthLbl = k => { const y = Math.floor(k / 12), m = k % 12; return lang === "tr" ? `${MONTHS[m].charAt(0)}${MONTHS[m].slice(1).toLocaleLowerCase("tr")} ${y}` : `${MONTHS_EN[m]} ${y}`; };
+let status = "";
+let lang = localStorage.getItem("mz-lang") || "tr", cat = "indoor", brand = "", query = "", list = [], cur = -1, BRANDS_OPEN = false;
+const visible = () => {
+  if (query){ const q = norm(query).split(/\s+/); return DATA.filter(p => { const h = norm([p.b,p.n,p.d,T[lang].cats[p.c]].join(" ")); return q.every(w => h.includes(w)); }); }
+  return DATA.filter(p => p.c === cat && (!brand || p.b === brand) && (!status || (status === "now" ? !arrival(p) : String(arrival(p)) === status)));
+};
+function renderCats(){
+  const el = $("cats"); el.innerHTML = "";
+  CATS.forEach(c => { const n = DATA.filter(p => p.c === c && (!brand || p.b === brand)).length; if (!n) return;
+    const b = document.createElement("button"); b.type = "button"; b.innerHTML = `${T[lang].cats[c]}<small>${n}</small>`;
+    b.setAttribute("aria-current", !query && c === cat ? "true" : "false");
+    b.onclick = () => { cat = c; status = ""; query = ""; $("q").value = ""; $("qx").hidden = true; location.hash = c; render(); window.scrollTo({top:0}); };
+    el.append(b); });
+}
+function renderBrands(){
+  const bw = $("brands"); bw.innerHTML = ""; bw.hidden = !!query;
+  const tg = document.createElement("button"); tg.type = "button"; tg.className = "brand-toggle"; tg.setAttribute("aria-expanded", BRANDS_OPEN);
+  tg.innerHTML = `<span>${T[lang].brandsTab}</span><b lang="en"></b><i class="chev" aria-hidden="true"></i>`;
+  const NB = new Set(DATA.map(p => p.b)).size;
+  tg.querySelector("b").textContent = brand || `${T[lang].all} (${NB})`;
+  tg.onclick = () => { BRANDS_OPEN = !BRANDS_OPEN; renderBrands(); };
+  const bn = document.createElement("div"); bn.className = "brand-list"; bn.hidden = !BRANDS_OPEN;
+  bw.append(tg, bn);
+  ["", ...[...new Set(DATA.map(p => p.b))].sort((a,b) => a.localeCompare(b))].forEach(b => {
+    const x = document.createElement("button"); x.type = "button"; x.setAttribute("aria-pressed", b === brand);
+    x.textContent = b || `${T[lang].all} (${NB})`; if (b) x.lang = "en";
+    const n = document.createElement("small"); n.textContent = DATA.filter(p => !b || p.b === b).length; x.append(n);
+    x.onclick = () => { brand = b; status = ""; BRANDS_OPEN = false;
+      if (brand && !DATA.some(p => p.c === cat && p.b === brand)) cat = CATS.find(c => DATA.some(p => p.c === c && p.b === brand)) || cat;
+      render(); };
+    bn.append(x);
+  });
+}
+function renderStatus(){
+  const s = $("stsel"), base = DATA.filter(p => p.c === cat && (!brand || p.b === brand));
+  const ks = [...new Set(base.map(arrival).filter(Boolean))].sort((a,b) => a - b);
+  s.innerHTML = ""; s.append(new Option(T[lang].st_all, ""));
+  s.append(new Option(`${T[lang].st_now} (${base.filter(p => !arrival(p)).length})`, "now"));
+  ks.forEach(k => s.append(new Option(`${monthLbl(k)} ${T[lang].st_soon} (${base.filter(p => arrival(p) === k).length})`, String(k))));
+  if (![...s.options].some(o => o.value === status)) status = "";
+  s.value = status; s.parentElement.hidden = !!query || !ks.length;
+}
+function renderGrid(){
+  list = visible(); const g = $("grid"); g.innerHTML = "";
+  $("count").textContent = `${list.length} ${T[lang].pieces}`;
+  if (!list.length){ g.innerHTML = `<p class="empty">${T[lang].none}</p>`; return; }
+  const frag = document.createDocumentFragment();
+  list.forEach((p, i) => {
+    const c = document.createElement("button"); c.className = "card"; c.type = "button";
+    c.innerHTML = `<div class="media"><img loading="lazy" alt=""></div><div class="meta"><span class="br"></span><h3></h3><span class="dm"></span>${p.x ? `<span class="dm">${p.x.length + 1} ${T[lang].photos}</span>` : ""}${arrival(p) ? `<span class="soon">${monthLbl(arrival(p))} ${T[lang].st_soon}</span>` : (p.q ? `<span class="qty">${p.q} ${T[lang].pcs}</span>` : "")}</div>`;
+    const im = c.querySelector("img"); im.src = IMG + p.img; im.alt = `${p.b} ${p.n}`;
+    c.querySelector(".br").textContent = p.b; c.querySelector("h3").textContent = p.n; c.querySelector(".dm").textContent = p.z[0] || "";
+    c.onclick = () => openItem(i);
+    frag.append(c);
+  });
+  g.append(frag);
+}
+function render(){
+  document.documentElement.lang = lang;
+  document.querySelectorAll("[data-t]").forEach(el => { const v = T[lang][el.dataset.t]; if (v) el.textContent = v; });
+  document.querySelectorAll(".lang button").forEach(b => b.setAttribute("aria-pressed", b.dataset.lang === lang));
+  $("q").placeholder = T[lang].ph;
+  $("title").textContent = query ? T[lang].results : T[lang].cats[cat];
+  renderCats(); renderBrands(); renderStatus(); renderGrid();
+}
+let pics = [], pi = 0, lbList = null, lbi = 0;
+function renderGal(){
+  const hero = $("d-hero"); [...hero.children].forEach(c => { if (c.id !== "d-close") c.remove(); });
+  const p = list[cur], g = document.createElement("div"); g.className = "gal";
+  const main = document.createElement("div"); main.className = "gal-main";
+  const img = new Image(); img.alt = `${p.b} ${p.n}`; img.src = IMG + pics[pi]; main.append(img);
+  main.onclick = () => openLB();
+  let sx = null; main.addEventListener("touchstart", e => { sx = e.touches[0].clientX; }, {passive:true});
+  main.addEventListener("touchend", e => { if (sx === null) return; const dx = e.changedTouches[0].clientX - sx; sx = null; if (Math.abs(dx) > 50 && pics.length > 1){ e.preventDefault(); step(dx < 0 ? 1 : -1); } });
+  if (pics.length > 1){
+    const pv = document.createElement("button"); pv.className = "gal-nav prev"; pv.innerHTML = "&#8249;"; pv.setAttribute("aria-label","Previous"); pv.onclick = e => { e.stopPropagation(); step(-1); };
+    const nx = document.createElement("button"); nx.className = "gal-nav next"; nx.innerHTML = "&#8250;"; nx.setAttribute("aria-label","Next"); nx.onclick = e => { e.stopPropagation(); step(1); };
+    main.append(pv, nx);
+  }
+  const z = document.createElement("button"); z.className = "gal-zoom"; z.textContent = T[lang].zoom; z.onclick = e => { e.stopPropagation(); openLB(); }; main.append(z);
+  g.append(main);
+  if (pics.length > 1){
+    const th = document.createElement("div"); th.className = "thumbs";
+    pics.forEach((f, j) => { const b = document.createElement("button"); b.type = "button"; b.setAttribute("aria-current", j === pi); b.setAttribute("aria-label", (j+1) + "/" + pics.length);
+      const ti = new Image(); ti.alt = ""; ti.loading = "lazy"; ti.src = IMG + f; b.append(ti); b.onclick = () => { pi = j; renderGal(); }; th.append(b); });
+    g.append(th);
+  }
+  hero.prepend(g);
+}
+function step(d){ pi = (pi + d + pics.length) % pics.length; renderGal(); if (!$("lb").hidden) loadLB(); }
+function openItem(i){
+  cur = i; const p = list[i]; if (!p) return;
+  pics = [p.img, ...(p.x || [])]; pi = 0; renderGal();
+  $("d-brand").textContent = p.b; $("d-name").textContent = p.n; $("d-des").textContent = p.d; $("d-des").hidden = !p.d;
+  $("d-dims").innerHTML = p.z.map(z => `<p>${z.replace(/[<>&]/g,"")}</p>`).join(""); $("d-dims-row").hidden = !p.z.length;
+  $("d-qty").textContent = p.q ? `${p.q} ${T[lang].pcs}` : ""; $("d-qty-row").hidden = !p.q;
+  $("d-fin").innerHTML = ""; p.f.forEach(z => { const li = document.createElement("li"); li.textContent = z; $("d-fin").append(li); }); $("d-fin-row").hidden = !p.f.length;
+  const url = location.href.split("#")[0] + "#" + p.i;
+  $("d-wa").href = "https://wa.me/?text=" + encodeURIComponent(`${p.b} ${p.n} — Halı\n${url}`);
+  $("d-share").textContent = T[lang].share; $("d-share").onclick = () => { navigator.clipboard?.writeText(url); $("d-share").textContent = T[lang].copied; };
+  $("d-mat").innerHTML = ""; (p.m || []).forEach((f, j) => { const b = document.createElement("button"); b.type = "button"; const im = new Image(); im.alt = ""; im.loading = "lazy"; im.src = IMG + f; b.append(im); b.onclick = () => openLB(p.m, j); $("d-mat").append(b); }); $("d-mat-row").hidden = !(p.m && p.m.length);
+  $("d-note").innerHTML = ""; (p.r || []).forEach(z => { const li = document.createElement("li"); li.textContent = z; $("d-note").append(li); }); $("d-note-row").hidden = !(p.r && p.r.length);
+  $("d-next").hidden = i >= list.length - 1;
+  $("sheet").hidden = false; $("sheet").querySelector(".body").scrollTop = 0; document.body.style.overflow = "hidden";
+  history.replaceState(null, "", "#" + p.i);
+}
+function closeItem(){ $("sheet").hidden = true; document.body.style.overflow = ""; history.replaceState(null, "", "#" + cat); }
+function loadLB(){ const p = list[cur]; const L = lbList || pics, k = lbList ? lbi : pi; $("lb-img").src = IMG + L[k]; $("lb-title").textContent = `${p.b} ${p.n}`; $("lb-count").textContent = L.length > 1 ? `${k+1} / ${L.length}` : ""; $("lb-prev").hidden = $("lb-next").hidden = L.length < 2; $("lb-stage").classList.remove("z"); }
+function openLB(list2, k2){ lbList = list2 || null; lbi = k2 || 0; $("lb").hidden = false; loadLB(); }
+function lbStep(d){ if (lbList){ lbi = (lbi + d + lbList.length) % lbList.length; loadLB(); } else step(d); }
+$("lb-close").onclick = () => { $("lb").hidden = true; };
+$("lb-prev").onclick = e => { e.stopPropagation(); lbStep(-1); };
+$("lb-next").onclick = e => { e.stopPropagation(); lbStep(1); };
+$("lb-stage").onclick = e => { const st = $("lb-stage"), im = $("lb-img"); if (!st.classList.contains("z")){ const r = st.getBoundingClientRect(); im.style.transformOrigin = `${(e.clientX-r.left)/r.width*100}% ${(e.clientY-r.top)/r.height*100}%`; } st.classList.toggle("z"); };
+$("d-close").onclick = closeItem;
+$("d-next").onclick = () => openItem(cur + 1);
+document.addEventListener("keydown", e => { if (!$("lb").hidden){ if (e.key === "Escape") $("lb").hidden = true; if (e.key === "ArrowLeft") lbStep(-1); if (e.key === "ArrowRight") lbStep(1); return; } if ($("sheet").hidden) return; if (e.key === "Escape") closeItem(); if (pics.length > 1 && e.key === "ArrowLeft") step(-1); if (pics.length > 1 && e.key === "ArrowRight") step(1); });
+$("stsel").onchange = e => { status = e.target.value; renderGrid(); };
+let qt; $("q").addEventListener("input", e => { clearTimeout(qt); qt = setTimeout(() => { const v = e.target.value.trim(); query = v.length >= 2 ? v : ""; $("qx").hidden = !e.target.value; render(); }, 150); });
+$("qx").onclick = () => { $("q").value = ""; query = ""; $("qx").hidden = true; render(); $("q").focus(); };
+$("search-btn").onclick = () => { window.scrollTo({top:0, behavior:"smooth"}); $("q").focus(); };
+document.querySelectorAll(".lang button").forEach(b => b.onclick = () => { lang = b.dataset.lang; try { localStorage.setItem("mz-lang", lang); } catch(e){} render(); });
+(function init(){
+  const h = decodeURIComponent(location.hash.slice(1));
+  if (CATS.includes(h)) cat = h;
+  const item = DATA.find(p => p.i === h);
+  if (item) cat = item.c;
+  render();
+  if (item) openItem(list.indexOf(item));
+})();
+</script>
+</body>
+</html>
