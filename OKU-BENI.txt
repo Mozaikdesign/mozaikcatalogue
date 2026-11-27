@@ -1,0 +1,14 @@
+Bugünkü güncellemeler (27 Kasım 2026)
+
+GitHub: github.com/Mozaikdesign/mozaikcatalogue → Add file → Upload files
+Bu klasörün İÇİNDEKİLERİ (klasörün kendisini değil) sürükleyip bırakın:
+  index.html, showroom.html, aydinlatma.html, hali.html  → mevcut dosyaların üzerine yazar
+  showroom/    (47 yeni fotoğraf)
+  aydinlatma/  (62 yeni fotoğraf)
+Commit mesajı: "Güncel Stok 1 Aralık + Aydınlatma 19 Kasım + Ankara + mobil kategoriler"
+
+İçerik:
+- Güncel Stok: 1 Aralık 2026 listesi (587 parça)
+- Aydınlatma: 19 Kasım durumları, Design Shop durumu, yeni Ankara sekmesi (62 ürün)
+- Halı: eski detay paneli kaldırıldı
+- Tüm sayfalar: mobilde kategoriler alt alta (yana kaydırma yok)
